@@ -1,0 +1,67 @@
+﻿@*Define Model*@
+@model IEnumerable<Producer>
+
+@*Define View Data*@
+
+@{
+    @*Write C sharp code here*@
+    ViewData["Title"] = "List of All Prodcuer";
+}
+
+@*Write Code *@
+
+
+<div class="text-center">
+
+    <h1 class="text-info"><u>All Producers List </u></h1>
+</div>
+<div class=" row">
+  
+    
+    <div class="col-md-15 offset-md-2">
+        <table class="table" >
+            <thead>
+
+                <tr class="text-center" style="text-align:center; color:white;" bgcolor="green">
+                    
+                    <th> @Html.DisplayNameFor(Model => Model.ProfilePictureURL)  </th>
+                    <th> @Html.DisplayNameFor(Model => Model.FullName)  </th>
+                    <th> @Html.DisplayNameFor(Model => Model.Bio)  </th>
+                    <th style="max-width:100%"> Actions  </th>
+                </tr>
+
+            </thead>
+            <tbody >
+                @foreach (var item in Model)
+                {
+                    <tr class=" align-middle">
+                        <td>
+                            <img class="rounded-circle" src="@item.ProfilePictureURL" alt=" @item.FullName" style="max-width:150px" />
+                        </td>
+                        <td> @Html.DisplayFor(modelitem => item.FullName)</td>
+                        <td> @Html.DisplayFor(modelitem => item.Bio)</td>
+                        <td >
+                            <a class="btn btn-success text-white" asp-controller="Producers" asp-action="Edit" asp-route-id="@item.Id" ><i class="bi bi-pencil-square"></i> <b>Edit</b>     </a> |
+                            <a class="btn btn-info text-white" asp-controller="Producers" asp-action="Details" asp-route-id="@item.Id" ><i class="bi bi-eye"></i> <b>Detail</b>     </a> |
+                            <a class="btn btn-danger text-white"  asp-controller="Producers" asp-action="Delete" asp-route-id="@item.Id" ><i class="bi bi-trash"></i> <b>Delete</b>      </a>
+                            
+
+
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+
+
+        </table>
+
+
+    </div>
+
+
+
+
+</div>
+
+@await Html.PartialAsync("_CreateItem", "Producers") 
